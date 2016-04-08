@@ -5,6 +5,7 @@
 #include "roots.h"
 
 #include <vector>
+#include <stdexcept>
 
 using namespace testing;
 
@@ -77,4 +78,27 @@ TEST_F(RootFinder, SpecifiesValueOfDegree) {
   ASSERT_THAT(degree, Eq(2));
 }
 
+TEST_F(RootFinder, UncaughtExceptionThrownForLeadingCoefficientOfZero) {
+  Roots rootfinder(rpoly10);
+  try {
+    std::vector<double> coeff = {0.0, 1.0, 0.0, 0.0, 0.0, 0.0};
+    rootfinder.findRoots(coeff);
+    FAIL() << "Expected std::invalid_argument";
+  }
+  catch (const std::invalid_argument& expected) {
+    ASSERT_STREQ(expected.what(),"The leading coefficient is zero.");
+  }
+}
+
+TEST_F(RootFinder, UncaughtExceptionThrownForExceedingMaximalDegree) {
+  Roots rootfinder(rpoly01);
+  try {
+    std::vector<double> coeff = {1.0, 2.0, 3.0};
+    rootfinder.findRoots(coeff);
+    FAIL() << "Expected std::invalid_argument";
+  }
+  catch (const std::invalid_argument& expected) {
+    ASSERT_STREQ(expected.what(),"Requested maximal degree is greater than MAXDEGREE.");
+  }
+}
 
