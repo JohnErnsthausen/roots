@@ -7,7 +7,12 @@ add_definitions(-std=c++0x)
 
 set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -g -O2 -Wall -ansi -pedantic -Wc++11-compat")
 
-set(sources main.cpp rpolytest.cpp)
+set(sStub main.cpp rpolytest.cpp)
+add_executable(tStub ${sStub})
+target_link_libraries(tStub pthread)
+target_link_libraries(tStub gtest)
+
+set(sources main.cpp rootstest.cpp)
 add_executable(test ${sources})
 target_link_libraries(test pthread)
 target_link_libraries(test gtest)
