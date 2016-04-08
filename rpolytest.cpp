@@ -48,3 +48,13 @@ TEST(RpolyInterface, HasBaseClassVariableMaxDegree) {
   rpoly = nullptr;
 }
 
+TEST(RpolyInterface, HasBaseClassVariableMaxDegreePlusOne) {
+  RPoly* rpoly{nullptr};
+  rpoly = new RPolyStub(10);
+
+  ASSERT_THAT(rpoly->mdp1, Eq(11));
+  
+  delete rpoly;
+  rpoly = nullptr;
+}
+
