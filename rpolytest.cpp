@@ -1,7 +1,16 @@
 #include "gtest/gtest.h"
-#include "rpoly.h"
+
+// START:RPolyStub
+class RPolyStub {
+  public:
+    RPolyStub(int degree);
+};
+
+RPolyStub::RPolyStub(int degree) {
+};
+// END:RPolyStub
 
 TEST(RpolyInterface, ConstructorPopulatesMaximalDegree) {
-  RPoly = new RPolyStub(10);
+  RPolyStub stub(10);
 }
 
