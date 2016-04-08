@@ -38,7 +38,7 @@ TEST_F(RootFinder, FindRootsSpecifiedInStubForDegreeNine) {
   std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
   rootfinder.findRoots(coeff);
   
-  int degree{0};
+  int degree;
   std::vector<double> zr, zi;
   rootfinder.getRoots(degree, zr, zi);
 
@@ -64,4 +64,17 @@ TEST_F(RootFinder, FindRootsSpecifiedInStubForDegreeNine) {
   EXPECT_THAT(zi[8], Eq( 2.0));
   EXPECT_THAT(zi[9], Eq( 2.0));
 }
+
+TEST_F(RootFinder, SpecifiesValueOfDegree) {
+  Roots rootfinder(rpoly10);
+  std::vector<double> coeff = {1,2,3};
+  rootfinder.findRoots(coeff);
+
+  int degree;
+  std::vector<double> zr, zi;
+  rootfinder.getRoots(degree, zr, zi);
+
+  ASSERT_THAT(degree, Eq(2));
+}
+
 

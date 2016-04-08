@@ -15,7 +15,7 @@ class Roots {
     ~Roots(void);
     int getMaxDegree(void) const;
     void findRoots(const std::vector<double>& coeff);
-    void getRoots(int Degree, std::vector<double>& zr, std::vector<double>& zi) const;
+    void getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& zi) const;
 
   private:
     RPoly* rpoly_;
@@ -60,7 +60,7 @@ void Roots::findRoots(const std::vector<double>& coeff) {
   return;
 }
 
-void Roots::getRoots(int Degree, std::vector<double>& zr, std::vector<double>& zi) const {
+void Roots::getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& zi) const {
   Degree = degree;
   for(int j=0; j<=degree; j++) {
     zr.push_back(zeror[j]);
