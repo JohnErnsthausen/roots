@@ -1,4 +1,5 @@
 #include "rpoly.h"
+#include "helper.h"
 
 #include <vector>
 
@@ -9,16 +10,20 @@ class Roots {
   int maxDegree;
   int mdp1;
   int degree;
+  int realRoots;
 
   public:
     Roots(RPoly* rpoly);
     ~Roots(void);
     int getMaxDegree(void) const;
     void findRoots(const std::vector<double>& coeff);
+    void findRealRoots(void);
     void getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& zi) const;
+    double getAbsMinRealRoot(void) const;
 
   private:
     RPoly* rpoly_;
+    Helper helper;
 
     double* zeror{nullptr};
     double* zeroi{nullptr};
@@ -57,6 +62,16 @@ void Roots::findRoots(const std::vector<double>& coeff) {
   // Know length(coeff) .leq. length(op) because degree .leq. rpoly_->maxDegree
   rpoly_->rpoly(op, degree, zeror, zeroi);
 
+  findRealRoots();
+}
+
+void Roots::findRealRoots(void) {
+  realRoots=0;
+  for(int j=0;j<degree;j++) {
+    if(helper.nearly_equal(zeroi[j], 0.0, 10)) {
+      op[realRoots++] = zeror[j];
+    }
+  }
   return;
 }
 
@@ -67,6 +82,10 @@ void Roots::getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& 
     zi.push_back(zeroi[j]);
   }
   return;
+}
+
+double Roots::getAbsMinRealRoot(void) const {
+  return helper.absmin(realRoots, op);
 }
 
 #endif

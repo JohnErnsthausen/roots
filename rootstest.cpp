@@ -107,7 +107,7 @@ TEST_F(RootFinder, GetAbsMinimalRealRoot) {
   std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
   rootfinder.findRoots(coeff);
 
-  ASSERT_THAT(rootfinder.getAbsMinimalRealRoot(), Eq(0.065297428539351));
+  ASSERT_THAT(rootfinder.getAbsMinRealRoot(), Eq(0.065297428539351));
 }
 
 
