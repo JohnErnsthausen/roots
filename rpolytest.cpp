@@ -1,8 +1,11 @@
 #include "gmock/gmock.h"
 
 #include "rpoly.h"
+#include <stdexcept>
 
 using namespace testing;
+
+#define DEGREE 10
 
 // START:RPolyStub
 class RPolyStub: public RPoly {
@@ -29,20 +32,20 @@ void RPolyStub::rpoly(double* op, int Degree, double* zeror, double* zeroi) {}
 // END:RPolyStub
 
 TEST(RpolyInterface, ConstructorPopulatesMaximalDegree) {
-  RPolyStub stub(10);
-  ASSERT_THAT(stub.maxDegree, Eq(10));
+  RPolyStub stub(DEGREE);
+  ASSERT_THAT(stub.maxDegree, Eq(DEGREE));
 }
 
 TEST(RpolyInterface, ConstructorPopulatesMaximalDegreePlusOne) {
-  RPolyStub stub(10);
-  ASSERT_THAT(stub.mdp1, Eq(11));
+  RPolyStub stub(DEGREE);
+  ASSERT_THAT(stub.mdp1, Eq(DEGREE+1));
 }
 
 TEST(RpolyInterface, HasBaseClassVariableMaxDegree) {
   RPoly* rpoly{nullptr};
-  rpoly = new RPolyStub(10);
+  rpoly = new RPolyStub(DEGREE);
 
-  ASSERT_THAT(rpoly->maxDegree, Eq(10));
+  ASSERT_THAT(rpoly->maxDegree, Eq(DEGREE));
   
   delete rpoly;
   rpoly = nullptr;
@@ -50,11 +53,42 @@ TEST(RpolyInterface, HasBaseClassVariableMaxDegree) {
 
 TEST(RpolyInterface, HasBaseClassVariableMaxDegreePlusOne) {
   RPoly* rpoly{nullptr};
-  rpoly = new RPolyStub(10);
+  rpoly = new RPolyStub(DEGREE);
 
-  ASSERT_THAT(rpoly->mdp1, Eq(11));
+  ASSERT_THAT(rpoly->mdp1, Eq(DEGREE+1));
   
   delete rpoly;
   rpoly = nullptr;
 }
+
+TEST(RpolyInterface, ExceptionThrownForLeadingCoefficientOfZero) {
+  RPoly* rpoly{nullptr};
+  rpoly = new RPolyStub(DEGREE);
+
+  double* op{nullptr};
+  double* zr{nullptr};
+  double* zi{nullptr};
+  op = new double[DEGREE+1];
+  zr = new double[DEGREE];
+  zi = new double[DEGREE];
+
+  try {
+    op[0] = 0.0;
+    rpoly->rpoly(op,DEGREE,zr,zi);
+    FAIL() << "Expected std::invalid_argument";
+  }
+  catch (const std::invalid_argument& expected) {
+    ASSERT_STREQ(expected.what(),"The leading coefficient is zero.");
+  }
+
+  delete [] op;
+  delete [] zr;
+  delete [] zi;
+  delete rpoly;
+  op = nullptr;
+  zr = nullptr;
+  zi = nullptr;
+  rpoly = nullptr;
+}
+
 
