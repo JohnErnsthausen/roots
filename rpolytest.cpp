@@ -28,7 +28,11 @@ RPolyStub::~RPolyStub(void) {}
 
 void RPolyStub::initialize() {}
 
-void RPolyStub::rpoly(double* op, int Degree, double* zeror, double* zeroi) {}
+void RPolyStub::rpoly(double* op, int Degree, double* zeror, double* zeroi) {
+  if (op[0]==0.0) {
+    throw std::invalid_argument( "The leading coefficient is zero." );
+  }
+}
 // END:RPolyStub
 
 TEST(RpolyInterface, ConstructorPopulatesMaximalDegree) {
