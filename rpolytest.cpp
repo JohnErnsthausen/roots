@@ -95,4 +95,32 @@ TEST(RpolyInterface, ExceptionThrownForLeadingCoefficientOfZero) {
   rpoly = nullptr;
 }
 
+TEST(RpolyInterface, ExceptionThrownForExceedingMaximalDegree) {
+  RPoly* rpoly{nullptr};
+  rpoly = new RPolyStub(DEGREE);
+
+  double* op{nullptr};
+  double* zr{nullptr};
+  double* zi{nullptr};
+  op = new double[DEGREE+1];
+  zr = new double[DEGREE];
+  zi = new double[DEGREE];
+
+  try {
+    rpoly->rpoly(op,DEGREE+1,zr,zi);
+    FAIL() << "Expected std::invalid_argument";
+  }
+  catch (const std::invalid_argument& expected) {
+    ASSERT_STREQ(expected.what(),"Requested maximal degree is greater than MAXDEGREE.");
+  }
+
+  delete [] op;
+  delete [] zr;
+  delete [] zi;
+  delete rpoly;
+  op = nullptr;
+  zr = nullptr;
+  zi = nullptr;
+  rpoly = nullptr;
+}
 
