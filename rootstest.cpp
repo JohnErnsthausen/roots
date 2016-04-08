@@ -8,22 +8,33 @@
 
 using namespace testing;
 
-TEST(RootFinder, GetMaximalDegreeFromStub) {
-  RPoly* rpoly{nullptr};
-  rpoly = new RPolyStub(10);
+#define DEGREE 10
 
-  Roots rootfinder(rpoly);
-  ASSERT_THAT(rootfinder.getMaxDegree(), Eq(10));
-  
-  delete rpoly;
-  rpoly = nullptr;
+class RootFinder: public Test {
+  public:
+    RPoly* rpoly01{nullptr};
+    RPoly* rpoly10{nullptr};
+
+    void SetUp() override {
+      rpoly01 = new RPolyStub(1);
+      rpoly10 = new RPolyStub(DEGREE);
+    }
+
+    void TearDown() override {
+      delete rpoly01;
+      rpoly01 = nullptr;
+      delete rpoly10;
+      rpoly10 = nullptr;
+    }
+};
+
+TEST_F(RootFinder, GetMaximalDegreeFromStub) {
+  Roots rootfinder(rpoly10);
+  ASSERT_THAT(rootfinder.getMaxDegree(), Eq(DEGREE));
 }
 
-TEST(RootFinder, FindRootsSpecifiedInStubForDegreeNine) {
-  RPoly* rpoly{nullptr};
-  rpoly = new RPolyStub(10);
-
-  Roots rootfinder(rpoly);
+TEST_F(RootFinder, FindRootsSpecifiedInStubForDegreeNine) {
+  Roots rootfinder(rpoly10);
   std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
   rootfinder.findRoots(coeff);
   
@@ -52,8 +63,5 @@ TEST(RootFinder, FindRootsSpecifiedInStubForDegreeNine) {
   EXPECT_THAT(zi[7], Eq( 0.0));
   EXPECT_THAT(zi[8], Eq( 2.0));
   EXPECT_THAT(zi[9], Eq( 2.0));
-  
-  delete rpoly;
-  rpoly = nullptr;
 }
 
