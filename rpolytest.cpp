@@ -12,6 +12,7 @@ class RPolyStub {
 
 RPolyStub::RPolyStub(int degree) {
   maxDegree = degree;
+  mdp1 = degree+1;
 }
 // END:RPolyStub
 
