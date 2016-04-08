@@ -1,0 +1,13 @@
+project(roots)
+cmake_minimum_required(VERSION 2.6)
+
+include_directories($ENV{GMOCK_HOME}/googlemock/include $ENV{GMOCK_HOME}/googletest/include)
+link_directories($ENV{GMOCK_HOME}/mybuild/googlemock $ENV{GMOCK_HOME}/mybuild/googlemock/gtest)
+add_definitions(-std=c++0x)
+
+set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -g -O2 -Wall -ansi -pedantic -Wc++11-compat")
+
+set(sources main.cpp RootsTest.cpp)
+add_executable(test ${sources})
+target_link_libraries(test gtest)
+
