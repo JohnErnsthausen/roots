@@ -26,3 +26,7 @@ TEST(RpolyInterface, ConstructorPopulatesMaximalDegreePlusOne) {
   ASSERT_THAT(stub.mdp1, Eq(11));
 }
 
+TEST(RpolyInterface, HasBaseClass) {
+  RPoly* rpoly{nullptr};
+}
+
