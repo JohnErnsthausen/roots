@@ -1,7 +1,8 @@
+#include "rpoly.h"
+#include <stdexcept>
+
 #ifndef RPolyStub_h
 #define RPolyStub_h
-
-#include <stdexcept>
 
 class RPolyStub: public RPoly {
   public:
