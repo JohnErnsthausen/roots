@@ -12,5 +12,6 @@ RPolyStub::RPolyStub(int degree) {
 
 TEST(RpolyInterface, ConstructorPopulatesMaximalDegree) {
   RPolyStub stub(10);
+  ASSERT_THAT(stub.maxDegree, Eq(10));
 }
 
