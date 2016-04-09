@@ -17,3 +17,8 @@ add_executable(test ${sources})
 target_link_libraries(test pthread)
 target_link_libraries(test gtest)
 
+set(sAkiti main.cpp akititest.cpp)
+add_executable(tAkiti ${sAkiti})
+target_link_libraries(tAkiti pthread)
+target_link_libraries(tAkiti gtest)
+
