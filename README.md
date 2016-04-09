@@ -1,8 +1,16 @@
 # roots
 
-Roots is an interface class written in C++ to existing software packages. The interface is built
-on the expectation that the existing software will exhaustively exhibit all roots of a polynomial
-with real coefficients. The Jenkins-Traub algorithm will accomplish this expectation.
+Roots is an interface class written in C++ to existing software packages. The class implements the
+constructor injection design pattern.
+
+The interface is built on the expectation that the existing software will exhaustively exhibit all
+roots of a polynomial with real coefficients. The Jenkins-Traub algorithm will accomplish this expectation.
+
+The benefits of the roots class are:
+  * Dynamically handles its own memory.
+  * Eliminates hard coded constants in RPOLY.FOR restricting it to handle polynomials of degree 100 or less.
+  * This class is designed for performance, implementing the right balance of modern programming
+    and scientific computing.
 
 Let's take a look at the interface.
 ```cpp
@@ -39,8 +47,7 @@ Several scientific software developers have ported the FORTRAN 77 code to C++. T
 but may (slightly) modify the code to implement the interface.
 
 #### [Rpoly_ak1](http://www.akiti.ca/rpoly_ak1_Intro.html)
-Slightly modified the implementation an renamed it Akiti.
-Akiti is provided in this github repository.
+This github repository includes a slightly modified implementation of this code called Akiti.
 
 #### [Rpoly](https://github.com/ebertolazzi/Rpoly) by Enrico Bertolazzi
 
