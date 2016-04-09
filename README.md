@@ -71,13 +71,30 @@ be defined.
   > export GMOCK_HOME=/path/to/your/installation
 ```
 
-The basic work-flow:
+#### Install the roots class
+Put the following files on the include path.
+```
+#include "rpoly.h"
+#include "roots.h"
+#include "helper.h"
+
+#include "akiti.h"
+
+```
+The header file akiti implements the class as a slight modification of the codes at
+[Rpoly_ak1](http://www.akiti.ca/rpoly_ak1_Intro.html).
+
+Other implementations will be tested as my personal research permits or as contributors make
+them available to this repository.
+
+### The basic work-flow:
 ```
 mkdir build
 cd build
 cmake ..
 make
 ```
+Then run the executables.
 
 ## Getting started with roots
 Use the roots class to compute polynomial roots. The code exhibits the roots of the polynomial whose real coefficients
