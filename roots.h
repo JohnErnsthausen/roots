@@ -19,6 +19,7 @@ class Roots {
     void findRoots(const std::vector<double>& coeff);
     void findRealRoots(void);
     void getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& zi) const;
+    void getRoots(int& Degree, std::vector<double>& zr) const;
     double getAbsMinRealRoot(void) const;
     double getMinPosRealRoot(void) const;
     double getMaxPosRealRoot(void) const;
@@ -83,6 +84,13 @@ void Roots::getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& 
   for(int j=0; j<=degree; j++) {
     zr.push_back(zeror[j]);
     zi.push_back(zeroi[j]);
+  }
+}
+
+void Roots::getRoots(int& real, std::vector<double>& zr) const {
+  real = realRoots;
+  for(int j=0; j<=realRoots; j++) {
+    zr.push_back(op[j]);
   }
 }
 
