@@ -20,6 +20,10 @@ class Roots {
     void findRealRoots(void);
     void getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& zi) const;
     double getAbsMinRealRoot(void) const;
+    double getMinPosRealRoot(void) const;
+    double getMaxPosRealRoot(void) const;
+    double getMinNegRealRoot(void) const;
+    double getMaxNegRealRoot(void) const;
 
   private:
     RPoly* rpoly_;
@@ -72,7 +76,6 @@ void Roots::findRealRoots(void) {
       op[realRoots++] = zeror[j];
     }
   }
-  return;
 }
 
 void Roots::getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& zi) const {
@@ -81,11 +84,26 @@ void Roots::getRoots(int& Degree, std::vector<double>& zr, std::vector<double>& 
     zr.push_back(zeror[j]);
     zi.push_back(zeroi[j]);
   }
-  return;
 }
 
 double Roots::getAbsMinRealRoot(void) const {
   return helper.absmin(realRoots, op);
+}
+
+double Roots::getMinPosRealRoot(void) const {
+  return helper.minpos(realRoots, op);
+}
+
+double Roots::getMaxPosRealRoot(void) const {
+  return helper.maxpos(realRoots, op);
+}
+
+double Roots::getMinNegRealRoot(void) const {
+  return helper.minneg(realRoots, op);
+}
+
+double Roots::getMaxNegRealRoot(void) const {
+  return helper.maxneg(realRoots, op);
 }
 
 #endif

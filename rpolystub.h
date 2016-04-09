@@ -44,14 +44,18 @@ void RPolyStub::rpoly(double* op, int Degree, double* zeror, double* zeroi) {
     zeror[7] = 2.0;
     zeror[8] = 3.0;
     zeror[9] = 4.0;
+
     zeroi[0] = 0.0;
     zeroi[1] = 0.0;
     zeroi[2] = 0.0;
+
     zeroi[3] =-2.0;
     zeroi[4] =-2.0;
+
     zeroi[5] = 0.0;
     zeroi[6] = 0.0;
     zeroi[7] = 0.0;
+
     zeroi[8] = 2.0;
     zeroi[9] = 2.0;
   }

@@ -110,4 +110,35 @@ TEST_F(RootFinder, GetAbsMinimalRealRoot) {
   ASSERT_THAT(rootfinder.getAbsMinRealRoot(), Eq(0.065297428539351));
 }
 
+TEST_F(RootFinder, GetMinimalPositiveRealRoot) {
+  Roots rootfinder(rpoly10);
+  std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
+  rootfinder.findRoots(coeff);
+
+  ASSERT_THAT(rootfinder.getMinPosRealRoot(), Eq(0.065297428539351));
+}
+
+TEST_F(RootFinder, GetMaximalPositiveRealRoot) {
+  Roots rootfinder(rpoly10);
+  std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
+  rootfinder.findRoots(coeff);
+
+  ASSERT_THAT(rootfinder.getMaxPosRealRoot(), Eq(2.0));
+}
+
+TEST_F(RootFinder, GetMinimalNegativeRealRoot) {
+  Roots rootfinder(rpoly10);
+  std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
+  rootfinder.findRoots(coeff);
+
+  ASSERT_THAT(rootfinder.getMinNegRealRoot(), Eq(-0.07));
+}
+
+TEST_F(RootFinder, GetMaximalNegativeRealRoot) {
+  Roots rootfinder(rpoly10);
+  std::vector<double> coeff = {1,2,3,4,5,6,7,8,9,10};
+  rootfinder.findRoots(coeff);
+
+  ASSERT_THAT(rootfinder.getMaxNegRealRoot(), Eq(-2.0));
+}
 
